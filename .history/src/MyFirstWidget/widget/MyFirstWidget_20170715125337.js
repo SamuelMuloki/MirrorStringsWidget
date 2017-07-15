@@ -3,11 +3,16 @@ define([
     "mxui/widget/_WidgetBase",
     "dijit/_TemplatedMixin",
 
+    "dojo/dom-style",
+    "dojo/_base/array",
+    "dojo/_base/lang",
     "dojo/text",
+    "dojo/html",
 
     "dojo/text!MyFirstWidget/widget/template/MyFirstWidget.html"
 ], function (declare, _WidgetBase, _TemplatedMixin,
-             dojoText, widgetTemplate) {
+             dojoStyle, dojoArray, lang, dojoText, dojoHtml,
+             widgetTemplate) {
 
     return declare("MyFirstWidget.widget.MyFirstWidget", [ _WidgetBase, _TemplatedMixin ], {
         templateString: widgetTemplate,

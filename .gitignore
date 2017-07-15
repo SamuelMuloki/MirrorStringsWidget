@@ -12,7 +12,7 @@ test/.project
 .idea/
 
 dist/
-
+.history
 node_modules/
 .editorconfig
 *DS_Store*

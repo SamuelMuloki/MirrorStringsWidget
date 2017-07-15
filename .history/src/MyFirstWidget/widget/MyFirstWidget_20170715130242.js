@@ -7,7 +7,8 @@ define([
 
     "dojo/text!MyFirstWidget/widget/template/MyFirstWidget.html"
 ], function (declare, _WidgetBase, _TemplatedMixin,
-             dojoText, widgetTemplate) {
+             dojoStyle, dojoText,
+             widgetTemplate) {
 
     return declare("MyFirstWidget.widget.MyFirstWidget", [ _WidgetBase, _TemplatedMixin ], {
         templateString: widgetTemplate,
