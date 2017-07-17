@@ -1,0 +1,10 @@
+{
+  "generator-mendix": {
+    "promptValues": {
+      "copyright": "Flock Of Birds",
+      "license": "MIT",
+      "author": "Muloki Samuel",
+      "boilerplate": "appstore"
+    }
+  }
+}
