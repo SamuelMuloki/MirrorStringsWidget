@@ -9,13 +9,24 @@
             <category>Appearance</category>
             <description>The message visible within the widget</description>
         </property>
-        <property key="dataAttribute" type="attribute" required="true">
+        <property key="dataAttribute" type="attribute" entityProperty="reverseEntity" required="true">
            <caption>Tag attribute</caption>
            <category>Data source</category>
            <description>Handles tag text input</description>
            <attributeTypes>
                <attributeType name="String" />
            </attributeTypes>
-       </property>
+        </property>
+        <property key="reverseEntity" type="entity" required="false">
+           <caption>Reverse object</caption>
+           <category>Data source</category>
+           <description>Reverse Entity</description>
+        </property>
+        <property key="mfToExecute" type="microflow" required="true" defaultValue="">
+            <caption>Microflow</caption>
+            <category>Behavior</category>
+            <description>The microflow to execute on click.</description>
+            <returnType type="Boolean" />
+        </property>
     </properties>
 </widget>

@@ -3,7 +3,6 @@ define([
     "mxui/widget/_WidgetBase",
     "dijit/_TemplatedMixin",
 
-
     "mxui/dom",
     "dojo/dom",
     "dojo/dom-prop",
@@ -21,6 +20,11 @@ define([
 
         dataAttribute: "",
         message: null,
+        textString: "",
+
+        //parameters to configure in the modeler
+        reverseEntity: "",
+        mfToExecute: "",
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _contextObj: null,
@@ -54,11 +58,64 @@ define([
                 var msg = this._contextObj.get(this.dataAttribute)
 
                 dojoHtml.set(this.message, this.reverseMsg(msg));
+
             } else {
                 dojoStyle.set(this.domNode, "display", "none");
             }
-
             this._executeCallback(callback, "_updateRendering");
+        },
+
+        createTag: function () {
+            mx.data.create({
+                entity: this.reverseEntity,
+                callback: lang.hitch(this, function (obj) {
+                    obj.set(this.dataAttribute, this.textString.value)
+                    this.saveTag(obj)
+                    console.log("Object created on server");
+                }),
+                error: function (e) {
+                    console.error("Could not commit object:", e);
+                }
+            });
+        },
+
+        saveTag: function (object) {
+            mx.data.commit({
+                mxobj: object,
+                callback: function () {
+                    console.log("Object committed");
+                },
+                error: function (e) {
+                    console.error("Could not commit object:", e);
+                }
+            });
+        },
+
+        _setupEvent: function () {
+            if (this.mfToExecute !== "") {
+                this._execMf(this.mfToExecute, this._contextObj.getGuid());
+            }
+        },
+
+         _execMf: function (mf, guid, cb) {
+            logger.debug(this.id + "._execMf");
+            if (mf && guid) {
+                mx.ui.action(mf, {
+                    params: {
+                        applyto: "selection",
+                        guids: [guid]
+                    },
+                    callback: lang.hitch(this, function (objs) {
+                        if (cb && typeof cb === "function") {
+                            cb(objs);
+                        }
+                    }),
+                    error: function (error) {
+                        mx.ui.error("Error executing microflow " + mf + " : " + error.message);
+                        console.error(this.id + "._execMf", error);
+                    }
+                }, this);
+            }
         },
 
         _executeCallback: function (cb, from) {
