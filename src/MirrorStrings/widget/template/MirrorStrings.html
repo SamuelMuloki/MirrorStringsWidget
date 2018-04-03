@@ -1,9 +1,9 @@
 <div class="widgetname">
     <form class="form-horizontal">
-        <div class="form-group"><input type="text" class="form-control" placeholder="Place Some text here" data-dojo-attach-point="textString"></div>
+        <div class="form-group"><input type="text" class="form-control" data-dojo-attach-event="onmouseleave:_setupEvent" placeholder="Place Some text here" data-dojo-attach-point="textString"></div>
         <div class="input-group" data-dojo-attach-point="inputNodes">
-            <span data-dojo-attach-point="message">my values</span>
+            <div data-dojo-attach-point="message">my values</div>
         </div>
-        <div data-dojo-attach-event='onClick:reverse'><input type="button" class="btn btn-default" value=" Reverse Me!"></div>      
+        <div data-dojo-attach-event="onClick:createTag"><input type="button" class="btn btn-default" value=" Reverse Me!"></div>
     </form>    
 </div>
